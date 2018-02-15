@@ -13,15 +13,8 @@ Visual Global Localization with a Hybrid WNN-CNN Approach
 
 [Click here to download]() 
 
-This dataset pertains to the ring road of the _Universidade Federal do Espírito Santo - UFES_ (Vitória, Brazil). It has a total extension of 3.7 km and contains 658 directories identified by their UTM (Universal Transverse Mercator) Zone 24K coordinates {latitude}_{longitude} in meters. 
-```
- Each directory contains 504 files in the format: <type><latitude>_<longitude>_<translation>_<rotation>.png 
- <type>: i = crop of remission grid map; r = crop of road grid map; t = color coded road grid map 
- <latitude>_<longitude>: UTM Zone 24K coordinates in meters 
- <translation>: in meters (-1.50, -1.00, -0.50, 0.00, 0.50, 1.00, 1.50) 
- <rotation>: in degrees (0.00, 15.00, 30.00, ..., 315.00, 330.00, 345.00) 
- Example: r7756533_-363795_0.50_315.00.png 
-```
+This dataset pertains to the ring road of the _Universidade Federal do Espírito Santo - UFES_ (Vitória, Brazil). It has a total extension of 3.7 km and coordinates {latitude}_{longitude} in meters measured in relation to UTM (Universal Transverse Mercator) Zone 24K. 
+
 
 ## Videos 
 
