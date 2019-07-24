@@ -1,0 +1,7 @@
+/home/avelino/deepslam/data/ufes_cnn/deltapos-20160825-01-20171122-5m-1m.txt
+/home/avelino/deepslam/data/ufes_cnn/deltapos-20160825-02-20171122-5m-1m.txt
+/home/avelino/deepslam/data/ufes_cnn/deltapos-20161021-20171122-5m-1m.txt
+/home/avelino/deepslam/data/ufes_cnn/deltapos-20171205-20171122-5m-1m.txt
+/home/avelino/deepslam/data/ufes_cnn/deltapos-20180112-20171122-5m-1m.txt
+/home/avelino/deepslam/data/ufes_cnn/deltapos-20180112-02-20171122-5m-1m.txt
+/home/avelino/deepslam/data/ufes_cnn/deltapos-20171122-20171122-5m-1m.txt
