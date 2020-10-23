@@ -56,10 +56,21 @@ Training takes about 30 hours with the default parameters on the **Volta da Ufes
 
 ### Install
 
-#### Torch 7
+#### Choose GCC/G++ 8
 
 ```shell
-  git clone https://github.com/torch/distro.git ~/torch --recursive
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 8
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 8
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 9
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 9
+sudo update-alternatives --config gcc
+sudo update-alternatives --config g++
+```
+
+#### Torch 7 (CUDA 10)
+
+```shell
+  git clone https://github.com/nagadomi/distro.git ~/torch --recursive
   cd ~/torch; bash install-deps;
   ./install.sh
   . ~/torch/install/bin/torch-activate
@@ -84,10 +95,11 @@ Training takes about 30 hours with the default parameters on the **Volta da Ufes
 ### Stereo libraries (optional)
 
 ```shell
-sudo apt-get install libpng++-dev
-cd ~/deepslam/spsstereo
+sudo apt install libpng++-dev
+git clone https://github.com/aforechi/spsstereo.git ~/spsstereo
+cd ~/spsstereo
 mkdir build && cd build
-cmake .. && make
+cmake -DCMAKE_BUILD_TYPE=Release .. && make
 ```
 
 ### Data
