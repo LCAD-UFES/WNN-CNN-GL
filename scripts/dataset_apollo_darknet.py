@@ -81,9 +81,6 @@ def create_dataset(datasetname_base, datasetname_curr, datasetname_base_out, dat
     data_curr_loop = detect_closure_loop(data_curr, offset_curr)
 
 
-    print  "AQUI: ", data_base_loop, " - ", data_curr_loop
-    raw_input("opsa")
-
     # data_base = data_base[:data_base_loop]
     # data_curr = data_curr[:data_curr_loop]
 
@@ -91,24 +88,17 @@ def create_dataset(datasetname_base, datasetname_curr, datasetname_base_out, dat
     data_base = data_base[data_base_index]
     data_base_label = np.arange(data_base.shape[0])
     # data_base_label = np.random.permutation(data_base.shape[0])
-    print 'first ', datasetname_base_out
     save_dataset_base(data_base, data_base_label, datasetname_base_out)
 
-    print 'saiu '
     data_base_pose_2d = np.dstack([data_base['x'], data_base['y'], data_base['rz']])[0]  # x, y, yaw
     data_curr_pose_2d = np.dstack([data_curr['x'], data_curr['y'], data_curr['rz']])[0]  # x, y, yaw
-    print 'start'
     curr_start, base_start = find_start_point(data_curr_pose_2d, data_base_pose_2d)
-    print 'build_spacial_index 1'
     data_curr_time = build_spacial_index(data_curr_pose_2d, curr_start)
-    print 'build_spacial_index 2'
     data_base_time = build_spacial_index(data_base_pose_2d, base_start)
-    print 'loop'
     for index_curr in range(len(data_curr)):
         index_base = find_closest_in_space(data_curr_pose_2d[index_curr], data_base_pose_2d,
                                            data_curr_time[index_curr], data_base_time,
                                            offset_base if index_curr == 0 else 5.0)
-#        print index_base
         if index_base < 0:  # get only frames ahead in space/time
             print 'live frame with no match: ', index_curr
             continue
@@ -116,7 +106,6 @@ def create_dataset(datasetname_base, datasetname_curr, datasetname_base_out, dat
         data_curr_label.append(data_base_label[index_base])
         data_curr_index.append(index_curr)
 
-#    print 'loop out'
     if offset_base == offset_curr:
         for index_base in range(len(data_base)):
             nearest_index = -1
@@ -139,7 +128,6 @@ def create_dataset(datasetname_base, datasetname_curr, datasetname_base_out, dat
         data_curr = data_curr[data_curr_index]
         data_curr_label = data_curr_label[data_curr_index]
 
-#    print 'second ', datasetname_base_out
     save_dataset_base(data_curr, data_curr_label, datasetname_curr_out)
 
     data_curr_pose_2d = np.dstack([data_curr['x'], data_curr['y'], data_curr['rz']])[0]
@@ -148,19 +136,16 @@ def create_dataset(datasetname_base, datasetname_curr, datasetname_base_out, dat
 
 if __name__ == '__main__':
     input_dir = '/dados/baidu/'
-    # output_dir = '/home/avelino/deepslam/data/ufes_wnn/'
-    # output_dir = '/Users/avelino/Sources/deepslam/data/ufes_wnn/'
     output_dir = '/dados/baidu/'
-    # offset_base_list = [1, 5, 10, 15, 30]
     offset_base_list = [5]
-    offset_curr = 5
+    offset_curr = 1
 
     #os.system('rm -rf ' + output_dir + '*')
-    datasets = ['20190918143332']
+    datasets = ['front-20190918143332', 'front-20190924124848','front-20191014142530','front-20191021162130','front-20191025104732','front-20191130112819','front-20191216123346','front-20191225153609','BASE']
 
     for k in range(0, len(offset_base_list)):
         offset_base = offset_base_list[k]
-        for i in range(0, len(datasets)):  # base datasets
+        for i in range(len(datasets)-1,len(datasets)):  # base datasets
             for j in range(0, len(datasets)):  # curr datasets
                 # if i != j: continue  # skips building base and curr datasets with different data
                 #if i == j: continue  # skips building base and curr datasets with same data
